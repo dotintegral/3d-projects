@@ -1,5 +1,24 @@
 $fn=50;
+use <face-buttons.scad>
+
 // plate variables
-width = 420;
-height = 5;
-length = 300;
+plateWidth = 420;
+plateHeight = 5;
+plateLength = 300;
+
+plateButtonsOffset = 30;
+
+module baseCube () {
+    cube([plateWidth, plateLength, plateHeight], true);
+}
+
+module facePlate () {
+    difference() {
+        baseCube();
+        translate([0, plateButtonsOffset, 0])
+        faceButtons(plateHeight * 2);
+    }
+}
+
+
+facePlate();
