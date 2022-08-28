@@ -1,4 +1,3 @@
-$fn=50;
 
 // button variables
 buttonRadius = 24 / 2;
