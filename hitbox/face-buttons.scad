@@ -1,90 +1,85 @@
 $fn=50;
 
 // button variables
-buttonRadius = 24;
-buttonSpacing = 32;
+buttonRadius = 24 / 2;
+buttonSpacing = 32 / 2;
 buttonAngle = 15;
 upButtonSpacing = 55;
+buttonsClustersSpacing = 50;
 
 buttonStep = buttonSpacing + buttonRadius;
 
-height = 5;
-
-module hitboxFacePlate () {
-    cube([width, length, height]);
+module buttonHole (height) {
+    cylinder(height, buttonRadius, buttonRadius);
 }
 
-
-module buttonHole () {
-    cylinder(height * 2, buttonRadius, buttonRadius);
-}
-
-module buttonDirectionalLayout () {
-    rotate(180, [0, 1, 0]) {
+module buttonDirectionalLayout (height) {
+    rotate(180, [0, 1, 0]) 
+    translate([0, 0, -height]) {
         // button right
-        buttonHole();
+        buttonHole(height);
     
         translate([sin(60) * buttonStep, cos(60) * buttonStep, 0]) {
             // button down
-            buttonHole();
+            buttonHole(height);
     
             // button left
             translate([cos(buttonAngle) * buttonStep, sin(buttonAngle) * buttonStep, 0])
-            buttonHole();
+            buttonHole(height);
         }
         
         // button 
-        translate([0, -1 * upButtonSpacing - buttonStep, 0])
-        buttonHole();
+        translate([0, -upButtonSpacing, 0])
+        buttonHole(height);
     }
 }
 
-module buttonHeartLayout() {
+module buttonHeartLayout(height) {
     // button cross
-    buttonHole();
+    buttonHole(height);
     
     // button square
     translate([0, buttonStep, 0])
-    buttonHole();
+    buttonHole(height);
 
     // button l1
     translate([0, buttonStep, 0])
     rotate(buttonAngle, [0, 0, 1])
     translate([0, buttonStep, 0]) 
-    buttonHole();
+    buttonHole(height);
 
     translate([sin(60) * buttonStep, cos(60) * buttonStep, 0]) {
         // button circle
-        buttonHole();
+        buttonHole(height);
         
         // button triangle 
         translate([0, buttonStep, 0])
-        buttonHole();
+        buttonHole(height);
     
         // button l2
         translate([0, buttonStep, 0])
         rotate(buttonAngle, [0, 0, 1])
         translate([0, buttonStep, 0]) 
-        buttonHole();
+        buttonHole(height);
 
         // button r2
         translate([cos(buttonAngle) * buttonStep, sin(buttonAngle) * buttonStep, 0])
-        buttonHole();
+        buttonHole(height);
 
         // button r1
         translate([0, buttonStep, 0])
         translate([cos(buttonAngle) * buttonStep, sin(buttonAngle) * buttonStep, 0])
-        buttonHole();
+        buttonHole(height);
     }
 }
 
-module buttonFaceLayout () {
-    translate([-60, buttonStep, 0])
-    buttonDirectionalLayout();
+module faceButtons (height) {
+    translate([-buttonsClustersSpacing / 2, buttonStep, -height / 2])
+    buttonDirectionalLayout(height);
     
-    translate([60, 0, 0])
-    buttonHeartLayout();
+    translate([buttonsClustersSpacing / 2, 0, -height / 2])
+    buttonHeartLayout(height);
 
 }
 
-buttonFaceLayout();
+faceButtons(10);
