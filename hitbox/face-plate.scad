@@ -20,4 +20,4 @@ module facePlate (width=plateWidth, height=plateHeight, length=plateLength) {
 }
 
 
-facePlate()
+facePlate();
