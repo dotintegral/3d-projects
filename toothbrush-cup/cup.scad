@@ -4,7 +4,7 @@ height = 120;
 bottomRadius = 35;
 topRadius = 45;
 
-wallThickness = 2.5;
+wallThickness = 2;
 
 bottomThickness = 15;
 
@@ -37,12 +37,27 @@ module crossSection () {
     cube(200);
 }
 
+module wallHoles () {
+    module singleHole () {
+        rotate([0, 45, 0])
+        cube([8, 100, 8], center=true);
+    }
+
+    for(i=[0:7]) {
+        rotate(a=[0,0,22.5 + i * 45])
+        singleHole();
+    }
+
+}
+
 module finalCup () {
     difference() {
         cupShape();
         bottomHoles();
+        wallHoles();
         // crossSection();
     }
+
 }
 
 

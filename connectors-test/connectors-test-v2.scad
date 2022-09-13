@@ -2,10 +2,12 @@ holeSizeDiff = 1;
 
 module connector(length,size,isHole=false) {
     change = isHole? holeSizeDiff : 0;
+    radius = (size/2 + change);
 
     translate(v=[0,0,size/2])
     rotate(a=[90, 22.5, 90])
-    cylinder(h=length, r=(size/2 + change), $fn=8);
+    cylinder(h=length, r=radius, $fn=8);
+    echo("radius"); echo(radius);
 }
 
 // connector(50, 10, 0);
@@ -40,4 +42,4 @@ module connectorHoles () {
 //     connectorHoles();
 // }
 
-connector(length=70, size=7, isHole=false);
+connector(length=70, size=8.8, isHole=false);
