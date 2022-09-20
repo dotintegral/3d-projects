@@ -42,4 +42,4 @@ module connectorHoles () {
 //     connectorHoles();
 // }
 
-connector(length=70, size=8.8, isHole=false);
+connector(length=70, size=8.6, isHole=false);

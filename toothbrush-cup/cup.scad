@@ -57,8 +57,25 @@ module finalCup () {
         wallHoles();
         // crossSection();
     }
-
 }
 
 
-finalCup();
+
+  //  finalCup();
+
+
+module sourcer() {
+    sourcerRadius = 45;
+
+    module wycinka () {
+        translate(v=[0,0,2]) 
+        cylinder(h=13, r1=sourcerRadius-1, r2=sourcerRadius+1, $fn=8);
+    }
+
+    difference() {
+        cylinder(h=15, r1=sourcerRadius, r2=sourcerRadius+2, $fn=8);
+        wycinka();
+    }
+}
+
+sourcer();
