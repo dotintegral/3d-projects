@@ -1,4 +1,4 @@
-standHeight = 15;
+standHeight = 20;
 standWidth = 65;
 standWallThicknes = 5;
 standSupportHeight = 5;
@@ -20,11 +20,24 @@ module standBaseCutout () {
     cube([
         standWidth,
         standWidth,
-        standSupportHeight
+        standSupportHeight + 2
     ]);
 }
+
+
+
+module hexCutouts () {
+    for(j=[0:4]) {
+        for(i=[0:4]) {
+            translate(v=[13+12*i,13 + 12*j,-1]) 
+            cylinder(h=standHeight+2, r=5, $fn=6);
+        }
+    }
+}
+
 
 difference() {
     standBase();
     standBaseCutout();
+    // hexCutouts();
 }

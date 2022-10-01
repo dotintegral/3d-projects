@@ -44,8 +44,8 @@ module base() {
     difference() {
         flatBase();
         fullRibbonHoles();
-        translate(v=[0,0,baseThickness-1]) 
-        roundCutout(height=1, radius=baseRadius-20, delta=1);
+        // translate(v=[0,0,baseThickness-1]) 
+        // roundCutout(height=1, radius=baseRadius-20, delta=1);
     }
     
 }
