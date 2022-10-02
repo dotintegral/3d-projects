@@ -1,4 +1,4 @@
-standHeight = 20;
+standHeight = 30;
 standWidth = 65;
 standWallThicknes = 5;
 standSupportHeight = 5;
