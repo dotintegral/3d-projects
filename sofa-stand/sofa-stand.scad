@@ -1,6 +1,6 @@
 standHeight = 30;
-standWidth = 65;
-standWallThicknes = 5;
+standWidth = 57;
+standWallThicknes = 3;
 standSupportHeight = 5;
 
 module standBase () {
