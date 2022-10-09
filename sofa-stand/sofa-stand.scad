@@ -57,6 +57,7 @@ module cylinderSofaStand() {
     difference() {
         standBase();
         standBaseCutout();
+        cylinder(h = standHeight-1, r = cylinderStandRadius + standWallThicknes + cylinderStandBottomExpanded + 1);
     }
 }
 
