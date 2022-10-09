@@ -1,43 +1,67 @@
+$fn=60;
+
 standHeight = 30;
-standWidth = 57;
-standWallThicknes = 3;
+standWallThicknes = 2;
 standSupportHeight = 5;
 
-module standBase () {
-    cube([
-        standWidth + standWallThicknes*2,
-        standWidth + standWallThicknes*2,
-        standHeight + standSupportHeight
-    ]);
+squareStandWidth = 59;
+cylinderStandRadius = 29 / 2;
+cylinderStandBottomExpanded = 5;
+
+
+module squareSofaStand () {
+    module standBase () {
+        cube([
+            squareStandWidth + standWallThicknes*2,
+            squareStandWidth + standWallThicknes*2,
+            standHeight + standSupportHeight
+        ]);
+    }
+    
+    module standBaseCutout () {
+        translate([
+            standWallThicknes, 
+            standWallThicknes, 
+            standHeight
+        ])
+        cube([
+            squareStandWidth,
+            squareStandWidth,
+            standSupportHeight + 2
+        ]);
+    }
+
+    difference() {
+        standBase();
+        standBaseCutout();
+    }
 }
 
-module standBaseCutout () {
-    translate([
-        standWallThicknes, 
-        standWallThicknes, 
-        standHeight
-    ])
-    cube([
-        standWidth,
-        standWidth,
-        standSupportHeight + 2
-    ]);
-}
+module cylinderSofaStand() {
+    module standBase () {
+        cylinder(
+            h = standHeight + standSupportHeight,
+            r1= cylinderStandRadius + standWallThicknes + cylinderStandBottomExpanded, 
+            r2 = cylinderStandRadius + standWallThicknes
+        );
+    }
 
+    module standBaseCutout () {
+        translate(v = [0,0,standHeight]) 
+        cylinder(
+            h = standSupportHeight,
+            r = cylinderStandRadius
+        );
+    }
 
-
-module hexCutouts () {
-    for(j=[0:4]) {
-        for(i=[0:4]) {
-            translate(v=[13+12*i,13 + 12*j,-1]) 
-            cylinder(h=standHeight+2, r=5, $fn=6);
-        }
+    difference() {
+        standBase();
+        standBaseCutout();
     }
 }
 
 
-difference() {
-    standBase();
-    standBaseCutout();
-    // hexCutouts();
-}
+
+// squareSofaStand();
+cylinderSofaStand();
+
