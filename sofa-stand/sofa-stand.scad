@@ -5,7 +5,7 @@ standWallThicknes = 2;
 standSupportHeight = 5;
 
 squareStandWidth = 59;
-cylinderStandRadius = 29 / 2;
+cylinderStandRadius = 28 / 2;
 cylinderStandBottomExpanded = 5;
 
 
@@ -57,7 +57,7 @@ module cylinderSofaStand() {
     difference() {
         standBase();
         standBaseCutout();
-        cylinder(h = standHeight-1, r = cylinderStandRadius + standWallThicknes + cylinderStandBottomExpanded + 1);
+        // cylinder(h = standHeight-1, r = cylinderStandRadius + standWallThicknes + cylinderStandBottomExpanded + 1);
     }
 }
 
