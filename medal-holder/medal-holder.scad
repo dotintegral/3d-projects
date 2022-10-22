@@ -2,6 +2,9 @@ use <medal-dummy.scad>
 
 baseThickness = 2;
 baseRadius = 70;
+frameWidth = 8;
+frameOffset = 4;
+frameThickness = 15;
 
 
 module medal () {
@@ -50,6 +53,22 @@ module base() {
     
 }
 
+module frame () {
+    color("gold") {
+        rotate([0,0,90])
+        translate(v=[0,0,baseThickness*2]) {
+            difference() {
+                cylinder(h=frameThickness, r=baseRadius+frameWidth-frameOffset, $fn=6);
+                translate(v = [0,0,-0.1]) 
+                cylinder(h=frameThickness+0.2, r=baseRadius-frameOffset, $fn=6);
+            }
+        }
+    }
+}
+
 // medal();
 
 base();
+
+frame();
+
