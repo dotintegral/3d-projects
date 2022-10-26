@@ -2,9 +2,12 @@ use <medal-dummy.scad>
 
 baseThickness = 2;
 baseRadius = 70;
-frameWidth = 8;
+
+frameWidth = 10;
 frameOffset = 4;
 frameThickness = 15;
+frameBaseCutoutDiff = 1;
+frameFrontThickness = 3;
 
 
 module medal () {
@@ -15,6 +18,16 @@ module medal () {
 module flatBase () {
     rotate(a=[0,0,90]) 
     cylinder(h=baseThickness, r=baseRadius, $fn=6);
+}
+
+module baseCutout () {
+    color(c="red")
+    rotate(a=[0,0,90]) 
+    cylinder(
+        h=frameThickness, 
+        r=(baseRadius + frameBaseCutoutDiff), 
+        $fn=6
+    );
 }
 
 module ribbonCutout () {
@@ -53,22 +66,36 @@ module base() {
     
 }
 
-module frame () {
+module baseFrame () {
     color("gold") {
         rotate([0,0,90])
-        translate(v=[0,0,baseThickness*2]) {
-            difference() {
-                cylinder(h=frameThickness, r=baseRadius+frameWidth-frameOffset, $fn=6);
-                translate(v = [0,0,-0.1]) 
-                cylinder(h=frameThickness+0.2, r=baseRadius-frameOffset, $fn=6);
-            }
+        difference() {
+            cylinder(h=frameThickness, r=baseRadius+frameWidth-frameOffset, $fn=6);
+            translate(v = [0,0,-0.1]) 
+            cylinder(h=frameThickness+0.2, r=baseRadius-frameOffset, $fn=6);
         }
     }
 }
 
+module frameHanger () {
+    color("#ffe669")
+    translate(v = [-2.5,baseRadius,frameFrontThickness - 2]) 
+    cube([5,2,frameThickness - frameFrontThickness]);
+}
+
 // medal();
 
-base();
+// base();
+
+module frame () {
+    difference() {
+        baseFrame();
+        translate(v = [0,0,frameFrontThickness])
+        baseCutout(); 
+        frameHanger();
+    }
+}
 
 frame();
 
+// baseCutout();
