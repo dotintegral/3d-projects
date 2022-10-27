@@ -49,19 +49,39 @@ module sidePanel () {
     }
 
 
-    difference() {
-        roundedPanel();
-        bottomCutout();
-        sideCutout();
-    }
+    translate(v = [0,-sideThickness-roundRadius,0]){
+        difference() {
+            roundedPanel();
+            bottomCutout();
+            sideCutout();
+        }
+    } 
 }
 
 
 module rightSide () {
     color("#8585f5") {
-        cylinder(h=28, r=sideThickness, $fn=faces);
+        cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+        translate(v = [0,-7,0]) {
+            cube(size = [sideThickness,7,(maxHeight / 2)]);
+        } 
         sidePanel();
     }
 }
 
+module leftSide () {
+    color("#e91e63") {
+        translate(v = [0,0,maxHeight / 2]) {
+            cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+        } 
+        translate(v = [-sideThickness,-7,maxHeight / 2]) {
+            cube(size = [sideThickness,7,(maxHeight / 2)-roundRadius]);
+        } 
+        mirror(v=[1,0,0]) {
+            sidePanel();
+        }
+    }
+}
+
 rightSide();
+leftSide();
