@@ -2,11 +2,10 @@ use <../utils/m3.scad>;
 
 faces=50;
 sideThickness = 5;
-maxHeight = 35;
+maxHeight = 29;
 roundRadius = 2;
 
 
-// m3Tight(height=25, headHeight=4);
 
 module sidePanel () {
     panelLength = 70;
@@ -77,7 +76,10 @@ module sidePanelWithPhoneHole() {
 
 module rightSide () {
     color("#8585f5") {
-        cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+        difference() {
+            cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+            m3Tight(height=25, headHeight=4);
+        }
         translate(v = [0,-7,0]) {
             cube(size = [sideThickness,7,(maxHeight / 2)]);
         } 
@@ -87,9 +89,12 @@ module rightSide () {
 
 module leftSide () {
     color("#e91e63") {
-        translate(v = [0,0,maxHeight / 2]) {
-            cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
-        } 
+        difference() {
+            translate(v = [0,0,maxHeight / 2]) {
+                cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+            } 
+            m3Loose(height=25, headHeight=4);
+        }
         translate(v = [-sideThickness,-7,maxHeight / 2]) {
             cube(size = [sideThickness,7,(maxHeight / 2)-roundRadius]);
         } 
