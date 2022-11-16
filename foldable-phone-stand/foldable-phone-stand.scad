@@ -76,13 +76,15 @@ module sidePanelWithPhoneHole() {
 
 module rightSide () {
     color("#8585f5") {
-        difference() {
-            cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+        difference() {  
+            union() {
+                cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+                translate(v = [0,-7,0]) {
+                    cube(size = [sideThickness,7,(maxHeight / 2)]);
+                } 
+            }
             m3Tight(height=25, headHeight=4);
         }
-        translate(v = [0,-7,0]) {
-            cube(size = [sideThickness,7,(maxHeight / 2)]);
-        } 
         sidePanelWithPhoneHole();
     }
 }
@@ -90,14 +92,16 @@ module rightSide () {
 module leftSide () {
     color("#e91e63") {
         difference() {
-            translate(v = [0,0,maxHeight / 2]) {
-                cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
-            } 
+            union() {
+                translate(v = [0,0,maxHeight / 2]) {
+                    cylinder(h=(maxHeight / 2), r=sideThickness, $fn=faces);
+                } 
+                translate(v = [-sideThickness,-7,maxHeight / 2]) {
+                    cube(size = [sideThickness,7,(maxHeight / 2)-roundRadius]);
+                } 
+            }
             m3Loose(height=25, headHeight=4);
         }
-        translate(v = [-sideThickness,-7,maxHeight / 2]) {
-            cube(size = [sideThickness,7,(maxHeight / 2)-roundRadius]);
-        } 
         mirror(v=[1,0,0]) {
             sidePanelWithPhoneHole();
         }
@@ -105,4 +109,4 @@ module leftSide () {
 }
 
 rightSide();
-leftSide();
+// leftSide();
