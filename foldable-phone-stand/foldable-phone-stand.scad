@@ -1,15 +1,15 @@
 use <../utils/m3.scad>;
 
 faces=50;
-sideThickness = 3.5;
-maxHeight = 28;
+sideThickness = 5;
+maxHeight = 35;
 roundRadius = 2;
 
 
 // m3Tight(height=25, headHeight=4);
 
 module sidePanel () {
-    panelLength = 60;
+    panelLength = 70;
 
     module roundedPanel () {
         translate([0,-panelLength,0]) {
@@ -58,6 +58,22 @@ module sidePanel () {
     } 
 }
 
+module fakePhone () {
+    translate(v = [-40,-60,10]) 
+    rotate(a = [-20,0,0]) 
+    cube([80,13,155]);
+}
+
+
+module sidePanelWithPhoneHole() {
+    rotate(a = [0,0,-20]) 
+    difference() {
+        rotate(a=[0,0,20])
+        sidePanel();
+        fakePhone();
+    }
+}
+
 
 module rightSide () {
     color("#8585f5") {
@@ -65,7 +81,7 @@ module rightSide () {
         translate(v = [0,-7,0]) {
             cube(size = [sideThickness,7,(maxHeight / 2)]);
         } 
-        sidePanel();
+        sidePanelWithPhoneHole();
     }
 }
 
@@ -78,7 +94,7 @@ module leftSide () {
             cube(size = [sideThickness,7,(maxHeight / 2)-roundRadius]);
         } 
         mirror(v=[1,0,0]) {
-            sidePanel();
+            sidePanelWithPhoneHole();
         }
     }
 }
