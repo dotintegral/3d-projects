@@ -1,6 +1,6 @@
 use <medal-dummy.scad>
 
-baseThickness = 2;
+baseThickness = 3;
 baseRadius = 70;
 
 frameWidth = 10;
@@ -83,9 +83,7 @@ module frameHanger () {
     cube([5,2,frameThickness - frameFrontThickness]);
 }
 
-// medal();
 
-// base();
 
 module frame () {
     difference() {
@@ -96,6 +94,8 @@ module frame () {
     }
 }
 
+// medal();
 frame();
 
+// base();
 // baseCutout();
