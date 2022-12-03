@@ -9,7 +9,7 @@ buttonsClustersSpacing = 50;
 buttonStep = buttonSpacing + buttonRadius;
 
 module buttonHole (height) {
-    color("red")
+    color("#dd4444")
     cylinder(height, buttonRadius, buttonRadius);
 }
 

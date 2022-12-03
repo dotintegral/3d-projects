@@ -14,22 +14,24 @@ frontHeight = 30;
 backHeight = 60;
 wallThicnkness = 5;
 
+cutoutColor = "#dd4444";
+
 
 module topDiffBlock () {
-    color("red")
+    color(cutoutColor)
     translate([-50, 0, frontHeight - 1])
     rotate(faceAngle, [1, 0, 0])
     cube([baseWidth + 100, baseLength + 30, 60]);
 }
 
 module frontDiffBlock () {
-    color("red")
+    color(cutoutColor)
     translate([-10, wallThicnkness * -4, 0])
     cube([baseWidth + 20, wallThicnkness * 4, frontHeight *2 ]);
 }
 
 module backDiffBlock () {
-    color("red")
+    color(cutoutColor)
     translate([-10, baseLength, 0]) 
     cube([baseWidth + 20, wallThicnkness * 4, backHeight * 2]);
 }
@@ -48,7 +50,7 @@ module frontWall() {
 }
 
 module backButton () {
-    color("red")
+    color(cutoutColor)
     translate([0, baseLength + wallThicnkness / 2, backHeight - buttonRadius - 15])
     rotate(90, [1,0,0])
     buttonHole(wallThicnkness * 2);
